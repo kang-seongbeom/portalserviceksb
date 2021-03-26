@@ -35,4 +35,39 @@ public class UserDao {
 
         return user;
     }
+
+    public User insert(User user) throws ClassNotFoundException, SQLException {
+        //mysql 연결
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection =
+                DriverManager.getConnection(
+                        "jdbc:mysql://localhost/jeju?" +
+                                "characterEncoding=utf-8&serverTimezone=UTC"
+                        ,"jeju","jejupw"
+                );
+
+        //쿼리 작성
+        PreparedStatement preparedStatement = connection.prepareStatement(
+                "insert into userinfo(name,password) value(?,?)"
+                , Statement.RETURN_GENERATED_KEYS
+        );
+        preparedStatement.setString(1, user.getName());
+        preparedStatement.setString(2, user.getPassword());
+
+        //얼마나 update 되었는지 카운트 해서 반환해 줌
+        preparedStatement.executeUpdate();
+
+        //auto increment의 값을 빼내옴
+        ResultSet resultSet= preparedStatement.getGeneratedKeys();
+        resultSet.next();
+
+        //빼내온 값을 셋팅
+        user.setId(resultSet.getInt(1));
+
+        //자원해지
+        preparedStatement.close();
+        connection.close();
+
+        return user;
+    }
 }
