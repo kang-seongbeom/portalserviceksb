@@ -12,7 +12,7 @@ public class UserDaoTest {
 
     @Test
     public void get() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new JejuUserDao();
+        UserDao userDao = new UserDao(new JejuConnectionMaker());
         Integer id = 1;
         String name = "hulk";
         String password = "1234";
@@ -34,7 +34,7 @@ public class UserDaoTest {
         user.setPassword(password);
 
         //셋팅한 값을 insert하기 위해 Dao로 넘어감
-        UserDao userDao = new JejuUserDao();
+        UserDao userDao = new UserDao(new JejuConnectionMaker());
         userDao.insert(user);
 
         //insert된 유저의 아이디를 가져옴
@@ -51,7 +51,7 @@ public class UserDaoTest {
 
     @Test
     public void getHalla() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new HallaUserDao();
+        UserDao userDao = new UserDao(new HallaConnectionMaker());
         Integer id = 1;
         String name = "hulk";
         String password = "1234";
@@ -73,7 +73,7 @@ public class UserDaoTest {
         user.setPassword(password);
 
         //셋팅한 값을 insert하기 위해 Dao로 넘어감
-        UserDao userDao = new HallaUserDao();
+        UserDao userDao = new UserDao(new HallaConnectionMaker());
         userDao.insert(user);
 
         //insert된 유저의 아이디를 가져옴

@@ -1,10 +1,18 @@
 import java.sql.*;
 
-public abstract class UserDao {
+public class UserDao {
+
+    private final ConnectionMaker connectionMaker;
+
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
+    }
+
+
     public User findById(Integer id) throws ClassNotFoundException, SQLException {
 
         //mysql 연결
-        Connection connection = getConnection();
+        Connection connection = connectionMaker.getConnection();
 
         //쿼리 작성
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -31,7 +39,7 @@ public abstract class UserDao {
     }
 
     public User insert(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = getConnection();
+        Connection connection = connectionMaker.getConnection();
 
         //쿼리 작성
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -57,14 +65,5 @@ public abstract class UserDao {
 
         return user;
     }
-
-    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
-//        //mysql 연결
-//        Class.forName("com.mysql.cj.jdbc.Driver");
-//        return DriverManager.getConnection(
-//                "jdbc:mysql://localhost/jeju?" +
-//                        "characterEncoding=utf-8&serverTimezone=UTC"
-//                , "jeju", "jejupw"
-//        );
 
 }

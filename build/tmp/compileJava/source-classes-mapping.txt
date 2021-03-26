@@ -2,3 +2,9 @@ User.java
  User
 UserDao.java
  UserDao
+HallaConnectionMaker.java
+ HallaConnectionMaker
+ConnectionMaker.java
+ ConnectionMaker
+JejuConnectionMaker.java
+ JejuConnectionMaker
