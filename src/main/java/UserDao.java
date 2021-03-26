@@ -1,16 +1,10 @@
 import java.sql.*;
 
-public class UserDao {
+public abstract class UserDao {
     public User findById(Integer id) throws ClassNotFoundException, SQLException {
 
         //mysql 연결
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection =
-                DriverManager.getConnection(
-                        "jdbc:mysql://localhost/jeju?" +
-                                "characterEncoding=utf-8&serverTimezone=UTC"
-                        ,"jeju","jejupw"
-                );
+        Connection connection = getConnection();
 
         //쿼리 작성
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -37,14 +31,7 @@ public class UserDao {
     }
 
     public User insert(User user) throws ClassNotFoundException, SQLException {
-        //mysql 연결
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection =
-                DriverManager.getConnection(
-                        "jdbc:mysql://localhost/jeju?" +
-                                "characterEncoding=utf-8&serverTimezone=UTC"
-                        ,"jeju","jejupw"
-                );
+        Connection connection = getConnection();
 
         //쿼리 작성
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -70,4 +57,14 @@ public class UserDao {
 
         return user;
     }
+
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
+//        //mysql 연결
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        return DriverManager.getConnection(
+//                "jdbc:mysql://localhost/jeju?" +
+//                        "characterEncoding=utf-8&serverTimezone=UTC"
+//                , "jeju", "jejupw"
+//        );
+
 }
