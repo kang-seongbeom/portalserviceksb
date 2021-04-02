@@ -38,7 +38,7 @@ public class UserDao {
         return user;
     }
 
-    public User insert(User user) throws ClassNotFoundException, SQLException {
+    public void insert(User user) throws ClassNotFoundException, SQLException {
         Connection connection = connectionMaker.getConnection();
 
         //쿼리 작성
@@ -63,7 +63,6 @@ public class UserDao {
         preparedStatement.close();
         connection.close();
 
-        return user;
     }
 
 }
