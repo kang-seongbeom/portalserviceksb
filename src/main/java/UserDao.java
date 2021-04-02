@@ -1,18 +1,19 @@
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
 
-    private final ConnectionMaker connectionMaker;
+    private final DataSource dataSource;
 
-    public UserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public UserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
 
-    public User findById(Integer id) throws ClassNotFoundException, SQLException {
+    public User findById(Integer id) throws SQLException {
 
         //mysql 연결
-        Connection connection = connectionMaker.getConnection();
+        Connection connection = dataSource.getConnection();
 
         //쿼리 작성
         PreparedStatement preparedStatement = connection.prepareStatement(
@@ -38,8 +39,8 @@ public class UserDao {
         return user;
     }
 
-    public void insert(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = connectionMaker.getConnection();
+    public void insert(User user) throws SQLException {
+        Connection connection = dataSource.getConnection();
 
         //쿼리 작성
         PreparedStatement preparedStatement = connection.prepareStatement(
