@@ -88,6 +88,8 @@ public class UserDaoTest {
         user.setPassword(password);
         userDao.insert(user);
 
+        //insert문에서 auto increment를 해 주고 셋팅을 해 주었다.
+        //객체 자체는 call by reference이기 때문에, getInt를 해도 값을 가져올 수 있는 것이다.
         userDao.delete(user.getId());
 
         User deleteUser = userDao.findById(user.getId());
