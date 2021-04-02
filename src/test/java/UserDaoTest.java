@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.sql.SQLException;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -52,6 +53,49 @@ public class UserDaoTest {
         assertThat(insertedUser.getName(), is(user.getName()));
         assertThat(insertedUser.getPassword(), is(user.getPassword()));
     }
+
+
+    @Test
+    public void update() throws SQLException {
+        User user = new User();
+
+        //값을 넣을 이름과 패스워드 셋팅
+        String name = "ksb";
+        String password = "1111";
+        user.setName(name);
+        user.setPassword(password);
+        userDao.insert(user);
+
+        user.setName("kkk");
+        user.setPassword("0000");
+        userDao.update(user);
+
+        User updateUser = userDao.findById(user.getId());
+
+        assertThat(updateUser.getId(), is(user.getId()));
+        assertThat(updateUser.getName(), is(user.getName()));
+        assertThat(updateUser.getPassword(), is(user.getPassword()));
+    }
+
+    @Test
+    public void delete() throws SQLException {
+        User user = new User();
+
+        //값을 넣을 이름과 패스워드 셋팅
+        String name = "ksb";
+        String password = "1111";
+        user.setName(name);
+        user.setPassword(password);
+        userDao.insert(user);
+
+        userDao.delete(user.getId());
+
+        User deleteUser = userDao.findById(user.getId());
+        assertThat(deleteUser, nullValue());
+    }
+
+
+
 //
 //    @Test
 //    public void getHalla() throws SQLException, ClassNotFoundException {
