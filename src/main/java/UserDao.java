@@ -1,45 +1,35 @@
-import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
 
-
     private final JdbcContext jdbcContext;
 
-    public UserDao (JdbcContext jdbcContext){
+    public UserDao(JdbcContext jdbcContext) {
         this.jdbcContext = jdbcContext;
     }
 
     public User findById(Integer id) throws SQLException {
-        StatementStrategy statementStrategy = new FindByIdStatementStrategy(id);
-        return jdbcContext.jdbcContextForFindById(statementStrategy);
+        String sql = "select * from  userinfo where id = ?";
+        Object[] params = new Object[]{id};
+        return jdbcContext.findById(id, sql, params);
     }
+
     public void insert(User user) throws SQLException {
-        StatementStrategy statementStrategy = new InsertStatementStrategy(user);
-        jdbcContext.jdbcContextForInsert(user, statementStrategy);
+        String sql = "insert into userinfo(name,password) value(?,?)";
+        Object[] params = new Object[]{user.getName(),user.getPassword()};
+        jdbcContext.insert(user, sql, params, this);
     }
-    public void update(User user) throws SQLException{
-        StatementStrategy statementStrategy = new UpdateStatementStrategy(user);
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
+
+    public void update(User user) throws SQLException {
+        String sql = "update userinfo set name=?,password=? where id=?";
+        Object[] params = new Object[]{user.getName(),user.getPassword(),user.getId()};
+        jdbcContext.update(sql, params);
     }
+
     public void delete(Integer id) throws SQLException {
-        StatementStrategy statementStrategy = new DeleteStatementStrategy(id);
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
+        String sql = "delete from userinfo where id=?";
+        Object[] params = new Object[]{id};
+        jdbcContext.update(sql, params);
     }
 
-    private User jdbcContextForFindById(StatementStrategy statementStrategy) throws SQLException {
-
-        return jdbcContext.jdbcContextForFindById(statementStrategy);
-    }
-
-
-    private void jdbcContextForInsert(User user, StatementStrategy statementStrategy) throws SQLException {
-        jdbcContext.jdbcContextForInsert(user, statementStrategy);
-    }
-
-
-
-    private void jdbcContextForUpdate(StatementStrategy statementStrategy) throws SQLException {
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
-    }
 }

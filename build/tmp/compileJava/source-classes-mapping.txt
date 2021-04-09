@@ -6,16 +6,8 @@ HallaConnectionMaker.java
  HallaConnectionMaker
 ConnectionMaker.java
  ConnectionMaker
-DeleteStatementStrategy.java
- DeleteStatementStrategy
-InsertStatementStrategy.java
- InsertStatementStrategy
 StatementStrategy.java
  StatementStrategy
-FindByIdStatementStrategy.java
- FindByIdStatementStrategy
-UpdateStatementStrategy.java
- UpdateStatementStrategy
 UserDao.java
  UserDao
 JdbcContext.java
