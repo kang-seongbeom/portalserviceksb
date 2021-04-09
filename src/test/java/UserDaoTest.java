@@ -27,6 +27,7 @@ public class UserDaoTest {
         String name = "hulk";
         String password = "1234";
         User user = userDao.findById(id);
+        System.out.printf("UserInfo: ",user);
         assertThat(user.getId(), is(id));
         assertThat(user.getName(), is(name));
         assertThat(user.getPassword(), is(password));
@@ -37,8 +38,8 @@ public class UserDaoTest {
         User user = new User();
 
         //값을 넣을 이름과 패스워드 셋팅
-        String name = "ksb";
-        String password = "1111";
+        String name = "hulk";
+        String password = "1234";
         user.setName(name);
         user.setPassword(password);
         userDao.insert(user);

@@ -8,15 +8,17 @@ ConnectionMaker.java
  ConnectionMaker
 DeleteStatementStrategy.java
  DeleteStatementStrategy
-StatementStrategy.java
- StatementStrategy
-UpdateStatementStrategy.java
- UpdateStatementStrategy
-FindByIdStatementStrategy.java
- FindByIdStatementStrategy
 InsertStatementStrategy.java
  InsertStatementStrategy
+StatementStrategy.java
+ StatementStrategy
+FindByIdStatementStrategy.java
+ FindByIdStatementStrategy
+UpdateStatementStrategy.java
+ UpdateStatementStrategy
 UserDao.java
  UserDao
+JdbcContext.java
+ JdbcContext
 DaoFactory.java
  DaoFactory

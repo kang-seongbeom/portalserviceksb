@@ -26,7 +26,12 @@ public class DaoFactory {
 //    url = "jdbc:mysql://localhost/jeju?characterEncoding=utf-8&serverTimezone=UTC";
     @Bean
     public UserDao userDao() throws ClassNotFoundException {
-        return new UserDao(dataSource());
+        return new UserDao(jdbcContext());
+    }
+
+    @Bean
+    public JdbcContext jdbcContext() throws ClassNotFoundException {
+        return new JdbcContext(dataSource());
     }
 
     @Bean
