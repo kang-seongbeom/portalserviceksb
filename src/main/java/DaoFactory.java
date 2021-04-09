@@ -1,6 +1,7 @@
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
@@ -26,12 +27,12 @@ public class DaoFactory {
 //    url = "jdbc:mysql://localhost/jeju?characterEncoding=utf-8&serverTimezone=UTC";
     @Bean
     public UserDao userDao() throws ClassNotFoundException {
-        return new UserDao(jdbcContext());
+        return new UserDao(jdbcTemplate());
     }
 
     @Bean
-    public JdbcContext jdbcContext() throws ClassNotFoundException {
-        return new JdbcContext(dataSource());
+    public JdbcTemplate jdbcTemplate() throws ClassNotFoundException {
+        return new JdbcTemplate(dataSource());
     }
 
     @Bean
