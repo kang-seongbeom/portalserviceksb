@@ -18,13 +18,8 @@ public class UserDao {
         try {
             //mysql 연결
             connection = dataSource.getConnection();
-
-            //쿼리 작성
-            preparedStatement = connection.prepareStatement(
-                    "select * from  userinfo where id = ?"
-            );
-            preparedStatement.setInt(1, id);
-
+            StatementStrategy statementStrategy = new FindByIdStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(id, connection);
             //쿼리 실행
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
@@ -64,13 +59,8 @@ public class UserDao {
         try {
             connection = dataSource.getConnection();
 
-            //쿼리 작성
-            preparedStatement = connection.prepareStatement(
-                    "insert into userinfo(name,password) value(?,?)"
-                    , Statement.RETURN_GENERATED_KEYS
-            );
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
+            StatementStrategy statementStrategy = new InsertStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(user, connection);
 
             //얼마나 update 되었는지 카운트 해서 반환해 줌
             preparedStatement.executeUpdate();
@@ -104,13 +94,8 @@ public class UserDao {
         PreparedStatement preparedStatement = null;
         try {
             connection = dataSource.getConnection();
-
-            //쿼리 작성
-            preparedStatement = connection.prepareStatement(
-                    "update userinfo set name=?,password=? where id=?");
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setInt(3, user.getId());
+            StatementStrategy statementStrategy = new UpdateStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(user, connection);
 
             //얼마나 update 되었는지 카운트 해서 반환해 줌
             preparedStatement.executeUpdate();
@@ -136,9 +121,9 @@ public class UserDao {
         PreparedStatement preparedStatement = null;
         try {
             connection = dataSource.getConnection();
-            preparedStatement = connection.prepareStatement(
-                    "delete from userinfo where id=?");
-            preparedStatement.setInt(1, id);
+            StatementStrategy statementStrategy = new DeleteStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(id, connection);
+
             preparedStatement.executeUpdate();
         } finally {
 
