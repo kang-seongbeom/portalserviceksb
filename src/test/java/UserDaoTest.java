@@ -22,7 +22,7 @@ public class UserDaoTest {
 //                = new ClassPathXmlApplicationContext("daoFactory.xml");
 
 //        ApplicationContext applicationContext =
-//                new AnnotationConfigApplicationContext("kr.ac.jejunu.DaoFactory.class");
+//                new AnnotationConfigApplicationContext("DaoFactory.class");
 
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext("kr.ac.jejunu");
