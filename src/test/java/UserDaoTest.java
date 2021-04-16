@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.sql.SQLException;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.nullValue;
@@ -15,8 +17,12 @@ public class UserDaoTest {
     //ApplicationContext는 Bean을 다룬다.
     @BeforeAll
     public static void setup() {
-        ApplicationContext applicationContext =
-                new AnnotationConfigApplicationContext(DaoFactory.class);
+//        ApplicationContext applicationContext =
+//                new AnnotationConfigApplicationContext(DaoFactory.class);
+
+        ClassPathXmlApplicationContext applicationContext
+                = new ClassPathXmlApplicationContext("daoFactory.xml");
+
         userDao = applicationContext.getBean("userDao", UserDao.class);
     }
 
