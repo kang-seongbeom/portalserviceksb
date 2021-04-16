@@ -1,3 +1,5 @@
+package kr.ac.jejunu;
+
 import javax.sql.DataSource;
 import java.sql.*;
 

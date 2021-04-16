@@ -1,3 +1,5 @@
+package kr.ac.jejunu;
+
 public class User {
     private Integer id;
     private String name;

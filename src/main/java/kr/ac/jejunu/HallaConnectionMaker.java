@@ -1,8 +1,10 @@
+package kr.ac.jejunu;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class JejuConnectionMaker implements ConnectionMaker {
+public class HallaConnectionMaker implements ConnectionMaker {
     @Override
     public Connection getConnection() throws ClassNotFoundException, SQLException{
         //mysql 연결

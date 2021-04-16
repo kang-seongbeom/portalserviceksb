@@ -1,17 +1,25 @@
+package kr.ac.jejunu;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 
+@Component
 public class UserDao {
 
-    //private final JdbcContext jdbcContext;
-    private final JdbcTemplate jdbcTemplate;
+    //private final kr.ac.jejunu.JdbcContext jdbcContext;
 
-    public UserDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    //@Autowired
+//    public UserDao(JdbcTemplate jdbcTemplate) {
+//        this.jdbcTemplate = jdbcTemplate;
+//    }
 
     public User findById(Integer id) throws SQLException {
         String sql = "select * from  userinfo where id = ?";
