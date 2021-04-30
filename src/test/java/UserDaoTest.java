@@ -42,14 +42,7 @@ public class UserDaoTest {
 
     @Test
     public void insert() throws SQLException, ClassNotFoundException {
-        User user = new User();
-
-        //값을 넣을 이름과 패스워드 셋팅
-        String name = "hulk";
-        String password = "1234";
-
-        user.setName(name);
-        user.setPassword(password);
+        User user  = User.builder().name("hulk").password("1234").build();
 
         userDao.insert(user);
 
