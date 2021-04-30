@@ -5,7 +5,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
@@ -20,7 +19,7 @@ public class UserDao {
 //        this.jdbcTemplate = jdbcTemplate;
 //    }
 
-    public User findById(Integer id) throws SQLException {
+    public User findById(Integer id) {
         String sql = "select * from  userinfo where id = ?";
         Object[] params = new Object[]{id};
         User query = jdbcTemplate.query(sql, rs -> {
@@ -36,7 +35,7 @@ public class UserDao {
         return query;
     }
 
-    public void insert(User user) throws SQLException {
+    public void insert(User user) {
         String sql = "insert into userinfo(name,password) value(?,?)";
         Object[] params = new Object[]{user.getName(),user.getPassword()};
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -51,13 +50,13 @@ public class UserDao {
         user.setId(keyHolder.getKey().intValue());
     }
 
-    public void update(User user) throws SQLException {
+    public void update(User user) {
         String sql = "update userinfo set name=?,password=? where id=?";
         Object[] params = new Object[]{user.getName(),user.getPassword(),user.getId()};
         jdbcTemplate.update(sql, params);
     }
 
-    public void delete(Integer id) throws SQLException {
+    public void delete(Integer id) {
         String sql = "delete from userinfo where id=?";
         Object[] params = new Object[]{id};
         jdbcTemplate.update(sql, params);
