@@ -1,5 +1,3 @@
-package kr.ac.jejunu;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,10 +26,10 @@ public class DaoFactory {
 //    password = "jejupw";
 //    url = "jdbc:mysql://localhost/jeju?characterEncoding=utf-8&serverTimezone=UTC";
 
-//    @Bean
-//    public kr.ac.jejunu.UserDao userDao() throws ClassNotFoundException {
-//        return new kr.ac.jejunu.UserDao(jdbcTemplate());
-//    }
+    @Bean
+    public UserDao userDao() throws ClassNotFoundException {
+        return new UserDao(jdbcTemplate());
+    }
 
     @Bean
     public JdbcTemplate jdbcTemplate() throws ClassNotFoundException {

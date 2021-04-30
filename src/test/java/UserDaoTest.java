@@ -1,19 +1,17 @@
-
-import kr.ac.jejunu.User;
-import kr.ac.jejunu.UserDao;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
+
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class UserDaoTest {
-    static UserDao userDao;
+    public static UserDao userDao;
 
     //ApplicationContext는 Bean을 다룬다.
     @BeforeAll
@@ -25,7 +23,7 @@ public class UserDaoTest {
 //                new AnnotationConfigApplicationContext("DaoFactory.class");
 
         ApplicationContext applicationContext =
-                new AnnotationConfigApplicationContext("kr.ac.jejunu");
+                new AnnotationConfigApplicationContext(DaoFactory.class);
         userDao = applicationContext.getBean("userDao", UserDao.class);
     }
 
@@ -49,8 +47,10 @@ public class UserDaoTest {
         //값을 넣을 이름과 패스워드 셋팅
         String name = "hulk";
         String password = "1234";
+
         user.setName(name);
         user.setPassword(password);
+
         userDao.insert(user);
 
         //insert된 유저의 아이디를 가져옴
@@ -111,12 +111,12 @@ public class UserDaoTest {
 //
 //    @Test
 //    public void getHalla() throws SQLException, ClassNotFoundException {
-//        kr.ac.jejunu.UserDao userDao = new kr.ac.jejunu.UserDao(new kr.ac.jejunu.HallaConnectionMaker());
+//        UserDao userDao = new UserDao(new kr.ac.jejunu.HallaConnectionMaker());
 //        Integer id = 1;
 //        String name = "hulk";
 //        String password = "1234";
 //
-//        kr.ac.jejunu.User user = userDao.findById(id);
+//        User user = userDao.findById(id);
 //        assertThat(user.getId(), is(id));
 //        assertThat(user.getName(), is(name));
 //        assertThat(user.getPassword(), is(password));
@@ -124,7 +124,7 @@ public class UserDaoTest {
 //
 //    @Test
 //    public void insertHalla() throws SQLException, ClassNotFoundException {
-//        kr.ac.jejunu.User user = new kr.ac.jejunu.User();
+//        User user = new User();
 //
 //        //값을 넣을 이름과 패스워드 셋팅
 //        String name = "ksb";
@@ -133,11 +133,11 @@ public class UserDaoTest {
 //        user.setPassword(password);
 //
 //        //셋팅한 값을 insert하기 위해 Dao로 넘어감
-//        kr.ac.jejunu.UserDao userDao = new kr.ac.jejunu.UserDao(new kr.ac.jejunu.HallaConnectionMaker());
+//        UserDao userDao = new UserDao(new kr.ac.jejunu.HallaConnectionMaker());
 //        userDao.insert(user);
 //
 //        //insert된 유저의 아이디를 가져옴
-//        kr.ac.jejunu.User insertedUser = userDao.findById(user.getId());
+//        User insertedUser = userDao.findById(user.getId());
 //
 //        //가져온 아이디가 0보다 큰지에 대해 비교(id는 1부터 시작)
 //        assertThat(user.getId(), greaterThan(0));
