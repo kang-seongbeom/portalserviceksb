@@ -42,7 +42,9 @@ public class UserDaoTest {
 
     @Test
     public void insert() throws SQLException, ClassNotFoundException {
-        User user  = User.builder().name("hulk").password("1234").build();
+        String hulk = "hulk";
+        String password = "1234";
+        User user  = User.builder().name(hulk).password(password).build();
 
         userDao.insert(user);
 
@@ -60,13 +62,11 @@ public class UserDaoTest {
 
     @Test
     public void update() throws SQLException {
-        User user = new User();
-
         //값을 넣을 이름과 패스워드 셋팅
-        String name = "ksb";
-        String password = "1111";
-        user.setName(name);
-        user.setPassword(password);
+
+        String hulk = "hulk";
+        String password = "1234";
+        User user  = User.builder().name(hulk).password(password).build();
         userDao.insert(user);
 
         user.setName("kkk");
@@ -98,8 +98,6 @@ public class UserDaoTest {
         User deleteUser = userDao.findById(user.getId());
         assertThat(deleteUser, nullValue());
     }
-
-
 
 //
 //    @Test

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+   http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
+    <servlet>
+        <servlet-name>userServlet</servlet-name>
+        <servlet-class>UserServlet</servlet-class><!--자바 위치가 어디있는지 지금은 패키지안에 자바 파일이 없으므로 저게 맞다.-->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
