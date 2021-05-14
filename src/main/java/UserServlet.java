@@ -24,7 +24,7 @@ public class UserServlet extends GenericServlet {
         System.out.println("***************service***************");
         Integer id = Integer.parseInt(req.getParameter("id"));
         User user = userDao.findById(id);
-        res.setContentType("text/html; charset=UTF-8");
+        res.setContentType("text/html; charset=UTF-8"); //인코딩 문제 해결
         StringBuffer response = new StringBuffer();
         response.append("<html>");
         response.append("<Body>");
