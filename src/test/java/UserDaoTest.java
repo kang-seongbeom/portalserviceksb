@@ -1,3 +1,6 @@
+import kr.ac.jejunu.DaoFactory;
+import kr.ac.jejunu.User;
+import kr.ac.jejunu.UserDao;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -20,7 +23,7 @@ public class UserDaoTest {
 //                = new ClassPathXmlApplicationContext("daoFactory.xml");
 
 //        ApplicationContext applicationContext =
-//                new AnnotationConfigApplicationContext("DaoFactory.class");
+//                new AnnotationConfigApplicationContext("ac.kr.jejunu.DaoFactory.class");
 
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(DaoFactory.class);
@@ -102,12 +105,12 @@ public class UserDaoTest {
 //
 //    @Test
 //    public void getHalla() throws SQLException, ClassNotFoundException {
-//        UserDao userDao = new UserDao(new kr.ac.jejunu.HallaConnectionMaker());
+//        ac.kr.jejunu.UserDao userDao = new ac.kr.jejunu.UserDao(new kr.ac.jejunu.HallaConnectionMaker());
 //        Integer id = 1;
 //        String name = "hulk";
 //        String password = "1234";
 //
-//        User user = userDao.findById(id);
+//        ac.kr.jejunu.User user = userDao.findById(id);
 //        assertThat(user.getId(), is(id));
 //        assertThat(user.getName(), is(name));
 //        assertThat(user.getPassword(), is(password));
@@ -115,7 +118,7 @@ public class UserDaoTest {
 //
 //    @Test
 //    public void insertHalla() throws SQLException, ClassNotFoundException {
-//        User user = new User();
+//        ac.kr.jejunu.User user = new ac.kr.jejunu.User();
 //
 //        //값을 넣을 이름과 패스워드 셋팅
 //        String name = "ksb";
@@ -124,11 +127,11 @@ public class UserDaoTest {
 //        user.setPassword(password);
 //
 //        //셋팅한 값을 insert하기 위해 Dao로 넘어감
-//        UserDao userDao = new UserDao(new kr.ac.jejunu.HallaConnectionMaker());
+//        ac.kr.jejunu.UserDao userDao = new ac.kr.jejunu.UserDao(new kr.ac.jejunu.HallaConnectionMaker());
 //        userDao.insert(user);
 //
 //        //insert된 유저의 아이디를 가져옴
-//        User insertedUser = userDao.findById(user.getId());
+//        ac.kr.jejunu.User insertedUser = userDao.findById(user.getId());
 //
 //        //가져온 아이디가 0보다 큰지에 대해 비교(id는 1부터 시작)
 //        assertThat(user.getId(), greaterThan(0));

@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>userServlet</servlet-name>
-        <servlet-class>UserServlet</servlet-class><!--자바 위치가 어디있는지 지금은 패키지안에 자바 파일이 없으므로 저게 맞다.-->
+        <servlet-class>kr.ac.jejunu.UserServlet</servlet-class><!--자바 위치가 어디있는지 지금은 패키지안에 자바 파일이 없으므로 저게 맞다.-->
     </servlet>
     <servlet-mapping>
         <servlet-name>userServlet</servlet-name>
@@ -14,16 +14,16 @@
     </servlet-mapping>
     <filter>
         <filter-name>userFilter</filter-name>
-        <filter-class>UserFilter</filter-class>
+        <filter-class>kr.ac.jejunu.UserFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>userFilter</filter-name>
         <url-pattern>*</url-pattern> <!--모든 요청에 대해 필터를 적용 하겠다-->
     </filter-mapping>
     <listener>
-        <listener-class>UserContextLinstener</listener-class>
+        <listener-class>kr.ac.jejunu.UserContextLinstener</listener-class>
     </listener>
     <listener>
-        <listener-class>UserRequestLinstener</listener-class>
+        <listener-class>kr.ac.jejunu.UserRequestLinstener</listener-class>
     </listener>
 </web-app>
