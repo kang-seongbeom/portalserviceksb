@@ -32,6 +32,13 @@
     <!--Controller생성 없이 알아서 Controller와 resolver를 만들어서 /images/** 매핑을 해줌-->
     <resources mapping="/images/**" location="/WEB-INF/static/" />
 
+    <interceptors>
+        <interceptor>
+            <mapping path="/**"/>
+            <beans:bean class="kr.ac.jejunu.UserInterceptor" />
+        </interceptor>
+    </interceptors>
+
 <!--    SimpleServletHandlerAdapter는 Servlet의 init과 destroy를 하지 않는다.-->
 <!--    <beans:bean class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter"/>-->
 <!--    <beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
