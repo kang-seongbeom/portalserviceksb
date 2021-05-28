@@ -8,14 +8,30 @@
              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd ">
 
+    <!--'component-scan'를 사용하여 @Controller, @Service, @Repository를 찾아 빈 등록을 함-->
     <context:component-scan base-package="kr.ac.jejunu"/>
     <beans:bean name="/simple/user" class="kr.ac.jejunu.SimpleController">
         <beans:constructor-arg name="userDao" ref="userDao"/>
     </beans:bean>
+    <!--라이브러리와 함께 ContentNegotiatingViewResolver는 Jackson을 Json 등으로 보낼 수 있게 한다.-->
+    <annotation-driven /> <!--resources와 같이 사용하면 어노테이션 기반의 스프링을 사용할 수 없어서  driven을 넣어줘야함-->
+    <beans:bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <beans:property name="defaultViews">
+            <beans:list>
+                <beans:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></beans:bean>
+                <beans:bean class="org.springframework.web.servlet.view.xml.MappingJackson2XmlView"></beans:bean>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+    <!--InternalResourceViewResolver는 파일 이름 그대로 매핑을 해서 연결해 준다-->
     <beans:bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/"/>
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
+
+    <!--Controller생성 없이 알아서 Controller와 resolver를 만들어서 /images/** 매핑을 해줌-->
+    <resources mapping="/images/**" location="/WEB-INF/static/" />
+
 <!--    SimpleServletHandlerAdapter는 Servlet의 init과 destroy를 하지 않는다.-->
 <!--    <beans:bean class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter"/>-->
 <!--    <beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->

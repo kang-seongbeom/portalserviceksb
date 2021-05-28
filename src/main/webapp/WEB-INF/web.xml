@@ -20,7 +20,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-name>dispatcherServlet</servlet-name><!--패스가 root이기 때문에 dispatcherServlet찾아서 사용-->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <filter>
