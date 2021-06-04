@@ -31,7 +31,7 @@ public class UserServlet extends GenericServlet {
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
         System.out.println("***************service***************");
         Integer id = Integer.parseInt(req.getParameter("id"));
-        User user = userDao.findById(id);
+        User user = userDao.findById(id).orElse(null);
         res.setContentType("text/html; charset=UTF-8"); //인코딩 문제 해결
         StringBuffer response = new StringBuffer();
         response.append("<html>");

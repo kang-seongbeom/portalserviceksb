@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping(value = "/user/{id}", produces = "application/json")
     public User getUser(@PathVariable("id") Integer id, HttpSession httpSession){
         System.out.println("********** User getUser **********");
-        User user = userDao.findById(id);
+        User user = userDao.findById(id).orElse(null);
         httpSession.setAttribute("user", user);
         return user;
     }
