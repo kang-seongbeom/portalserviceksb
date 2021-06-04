@@ -7,17 +7,35 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
+import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     public final UserDao userDao;
 
-    @GetMapping("/user")
-    public User getUser(@RequestParam("id") Integer id){
-        System.out.println("********** User getUser **********");
-        return userDao.findById(id);
+    //검색과 같은 것은 restful(path에 의미가 있는 /id=1)한 @pathvatiable을 사용하지않고
+    //@RequestPram(?id=1)을 사용한다.
+//    @GetMapping(value = "/user/{id}", produces = "application/json")
+//    public User getUser(@PathVariable("id") Integer id, HttpSession httpSession){
+//        System.out.println("********** User getUser **********");
+//        User user = userDao.findById(id);
+//        httpSession.setAttribute("user", user);
+//        return user;
+//    }
+    @GetMapping(value = "/user", produces = "application/json")
+    public void getUser(User user){ //파라미터에 @ModelAttribute이 생략되어 있음. ModelAttribute는 request와 response를 둘다 가능
+        User u = userDao.findById(user.getId());
+        user.setPassword(u.getPassword());
+    }
+
+    @GetMapping(value = "/user/session", produces = "application/json")
+    public User sessionUser(HttpSession httpSession){
+        return (User)httpSession.getAttribute("user");
     }
 
     @GetMapping("upload") // @GetMapping("upload", params="id=1") -> id가 1인 것만 controller 작동
