@@ -20,18 +20,18 @@ public class UserController {
 
     //검색과 같은 것은 restful(path에 의미가 있는 /id=1)한 @pathvatiable을 사용하지않고
     //@RequestPram(?id=1)을 사용한다.
-//    @GetMapping(value = "/user/{id}", produces = "application/json")
-//    public User getUser(@PathVariable("id") Integer id, HttpSession httpSession){
-//        System.out.println("********** User getUser **********");
-//        User user = userDao.findById(id);
-//        httpSession.setAttribute("user", user);
-//        return user;
-//    }
-    @GetMapping(value = "/user", produces = "application/json")
-    public void getUser(User user){ //파라미터에 @ModelAttribute이 생략되어 있음. ModelAttribute는 request와 response를 둘다 가능
-        User u = userDao.findById(user.getId());
-        user.setPassword(u.getPassword());
+    @GetMapping(value = "/user/{id}", produces = "application/json")
+    public User getUser(@PathVariable("id") Integer id, HttpSession httpSession){
+        System.out.println("********** User getUser **********");
+        User user = userDao.findById(id);
+        httpSession.setAttribute("user", user);
+        return user;
     }
+//    @GetMapping(value = "/user", produces = "application/json")
+//    public void getUser(User user){ //파라미터에 @ModelAttribute이 생략되어 있음. ModelAttribute는 request와 response를 둘다 가능
+//        User u = userDao.findById(user.getId());
+//        user.setPassword(u.getPassword());
+//    }
 
     @GetMapping(value = "/user/session", produces = "application/json")
     public User sessionUser(HttpSession httpSession){
